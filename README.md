@@ -198,6 +198,7 @@ The source code and the exact build commands will be published in this repositor
 
 - **Karateka** © 1984 Jordan Mechner / Broderbund.
 - CoCo 3 port by Reinaldo Torres, CoCoByte Club.
+- The MIT license in `LICENSE` covers only this project's own code (transcoder, CoCo 3 runtime, hand-written routines, build tools). It does not cover Karateka: its code, graphics and music are not included here, and a disk built from it is not covered by that license.
 
 ---
 

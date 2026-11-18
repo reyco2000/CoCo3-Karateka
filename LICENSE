@@ -20,10 +20,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
-
-This license covers only the original code in this repository (the transcoder,
-the CoCo 3 runtime, the hand-written routines and the build tools). It does not
-cover Karateka itself. Karateka is (c) 1984 Jordan Mechner / Broderbund; its code,
-graphics and music are not included here, and a disk built from it is not
-covered by this license.
