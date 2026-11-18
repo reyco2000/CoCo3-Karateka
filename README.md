@@ -1,6 +1,6 @@
 # Karateka on the Tandy Color Computer 3: how it was built
 
-*Karateka (1984) by Jordan Mechner is one of the classics of the Apple II. This is how it ended up running on a CoCo 3: first on a 512K machine, then on a stock 128K one. It's the human version of the project notes: the technical story, without the commit-by-commit detail.*
+*Karateka (1984) by Jordan Mechner is one of the classics of the Apple II. This is how it ended up running on a CoCo 3: first on a 512K machine, then on a stock 128K one. 
 
 ---
 
@@ -27,7 +27,7 @@ Everything starts with understanding the disk. For that I used my own Claude ski
 
 👉 **https://github.com/reyco2000/6502-dissasembler-skill**
 
-The disk is a crack, in DOS 3.3 sector order, with no catalog and its own boot chain. Tracing the boot code gave the load map:
+The disk used came from a crack, in DOS 3.3 sector order, with no catalog and its own boot chain. Tracing the boot code gave the load map:
 
 - **boot0** at `$0801` reads track 0 into `$B600-$BFFF`: the loader and RWTS.
 - **The cold load** reads tracks 1-10 into `$0800-$A7FF`, and a **relocator** at `$2100` moves things into place before jumping to the intro at `$B77C`.
@@ -50,13 +50,13 @@ Some useful facts came out of comparing the images:
 
 ### What is transcoded
 
-A Python transcoder (`xcore/`) turns the 6502 code into 6809 assembly, which lwasm assembles:
+A Python transcoder turns the 6502 code into 6809 assembly, which lwasm assembles:
 
 - **Registers:** A stays A, X lives in B, and Y lives in a memory byte (`RY`). The 6502 stack is the 6809 stack, and the zero page is the 6809 direct page.
 - **Flags:** the generator tracks which flags are actually read later (liveness). It handles the 6502's inverted carry after compares lazily, so most instructions become one or two 6809 instructions.
 - **Hardware access** (keyboard `$C000`, speaker `$C030`, page flips `$C054/$C055`, buttons, paddles) becomes calls to small runtime handlers.
 - **What gets translated:**
-  - **The engine** (`$0800-$9FFF`) is translated **once**: about 9.6K of 6809.
+  - **The engine** (`$0800-$9FFF`) is translated **once**: about 9K of 6809.
   - **The stage code** is translated **once per stage**, five times, since each stage has its own overlay.
 
 Every translated routine is checked against the original. A test harness runs thousands of random cases on a 6502 model and on a 6809 model, and compares registers, flags and memory (`test_engine`).
@@ -197,8 +197,8 @@ The source code and the exact build commands will be published in this repositor
 ## Credits
 
 - **Karateka** © 1984 Jordan Mechner / Broderbund.
-- CoCo 3 port by Reinaldo Torres, CoCoByte Club.
-- The MIT license in `LICENSE` covers only this project's own code (transcoder, CoCo 3 runtime, hand-written routines, build tools). It does not cover Karateka: its code, graphics and music are not included here, and a disk built from it is not covered by that license.
+- CoCo 3 port by **Reinaldo Torres**, CoCoByte Club.
+- Transcoding techniques **nowhereman999** from https://github.com/nowhereman999/ROBOTRON_CoCo3
 
 ---
 
